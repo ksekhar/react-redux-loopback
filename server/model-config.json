@@ -1,0 +1,51 @@
+{
+  "_meta": {
+    "sources": [
+      "../common/models",
+      "./models",
+      "loopback-component-passport/lib/models",
+      "loopback/common/models",
+      "loopback/server/models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "user": {
+    "dataSource": "mysql",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "accessToken": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "userIdentity": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "userCredential": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "ACL": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "sse": {
+    "dataSource": "mysql",
+    "public": true
+  }
+}
