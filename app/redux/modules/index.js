@@ -4,9 +4,15 @@ import app from './app';
 
 // Combine reducers with routeReducer which keeps track of
 // router state
+
+const login = (state = {}) => {
+  return Object.assign(...state, {authenticated: true});
+};
+
 const rootReducer = combineReducers({
   app,
   routing,
+  login
 });
 
 export default rootReducer;
