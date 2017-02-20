@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import 'event-source-polyfill';
-// import injectTapEventPlugin from 'react-tap-event-plugin';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import configureStore from './redux/configureStore';
@@ -12,7 +12,7 @@ import buildRoutes from './routes';
 import preRenderMiddleware from './redux/middlewares/preRenderMiddleware';
 
 
-// injectTapEventPlugin();
+injectTapEventPlugin();
 const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState, browserHistory);
 const history = syncHistoryWithStore(browserHistory, store);

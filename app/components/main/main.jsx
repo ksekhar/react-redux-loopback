@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Card, CardText} from 'material-ui/Card';
 import { Link } from 'react-router';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -6,13 +6,13 @@ import TextField from 'material-ui/TextField';
 import './main.css';
 
 const Main = ({
-  onSubmit,
+  handleSubmit,
   email,
   password
 }) => {
   return (
     <Card className="container">
-      <form action="/auth/local" method="post" onSubmit={onSubmit}>
+      <form action="/auth/local" method="post" onSubmit={handleSubmit}>
         <h2 className="card-heading">Sign In</h2>
         <div className="field-line">
           <TextField
@@ -37,13 +37,6 @@ const Main = ({
       </form>
     </Card>
   );
-};
-
-
-Main.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  email: PropTypes.func.isRequired,
-  password: PropTypes.func.isRequired
 };
 
 export default Main;
