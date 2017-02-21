@@ -1,23 +1,27 @@
+// import {PropTypes} from 'react';
 import {connect} from 'react-redux';
+import {login} from '../redux/modules/app/actions';
+
 // import { bindActionCreators } from 'redux';
 
 import MainComponent from '../components/main/main';
 
-
-function mapStateToProps(state) {
+const mapStateToProps = (state, ownProps) => {
   const props = {
     app: state.app,
+    email: ownProps.email,
+    password: ownProps.password
   };
   return props;
-}
-// function mapDispatchToProps(dispatch) {
-function mapDispatchToProps(dispatch) {
+};
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    handleSubmit(e) {
+    handleSubmit: (e) => {
       e.preventDefault();
-      dispatch({type: 'LOGIN'});
+      dispatch(login({email: ownProps.email, password: ownProps.password}));
     }
-    // actions: bindActionCreators(boovatechActions, dispatch),
   };
-}
+};
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(MainComponent);

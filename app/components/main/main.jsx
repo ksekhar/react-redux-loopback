@@ -12,7 +12,7 @@ const Main = ({
 }) => {
   return (
     <Card className="container">
-      <form action="/auth/local" method="post" onSubmit={handleSubmit}>
+      <form action="/auth/local" onSubmit={handleSubmit}>
         <h2 className="card-heading">Sign In</h2>
         <div className="field-line">
           <TextField

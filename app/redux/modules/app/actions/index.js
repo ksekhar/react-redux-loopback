@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 export const LOGIN = 'LOGIN_PENDING';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -6,21 +8,15 @@ export const SET_FORM_FIELD = 'SET_FORM_FIELD';
 
 const FORM_FIELD_MAX_LENGTH = 100;
 
-const validateForm = (validate, fields) => validate(fields)
-  .prop('email')
-  .required()
-  .email()
-  .prop('password')
-  .required()
-  .password()
-  .promise;
 
-const post = (fetch, endpoint, body) =>
+const post = (endpoint, body) =>
   fetch(`/api/${endpoint}`, {
-    body: JSON.stringify(body),
-    credentials: 'include', // accept cookies from server, for authentication
-    headers: {Accept: 'application/json', 'Content-Type': 'application/json'},
-    method: 'post'
+    credentials: 'include',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body
   })
     .then((response) => {
       if (response.status === 200) return response.json();
@@ -36,11 +32,11 @@ export function setFormField({target: {name, value}}) {
 }
 
 export function login(fields) {
-  return ({fetch, validate}) => ({
+  return () => ({
     type: 'LOGIN',
     payload: {
-      promise: validateForm(validate, fields)
-        .then(() => post(fetch, 'users/login?include=user', fields))
+      promise:
+        post('users/login', fields)
         .then((value) => {
           if (value.error) {
             throw value.error;
@@ -52,7 +48,7 @@ export function login(fields) {
         })
         .catch((response) => {
           if (response.status === 401) {
-            throw validate.wrongPassword('password');
+            console.log('oh no');
           }
           throw response;
         })
@@ -61,7 +57,7 @@ export function login(fields) {
 }
 
 export function logout(token) {
-  return ({fetch}) => ({
+  return () => ({
     type: 'LOGOUT',
     payload: {
       promise: fetch(`/api/users/logout?access_token=${token}`, {
