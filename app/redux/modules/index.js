@@ -1,22 +1,28 @@
 import {combineReducers} from 'redux';
 import {routerReducer as routing} from 'react-router-redux';
+import {Record} from 'immutable';
 import app from './app';
 import * as actions from './app/actions';
 
-// Combine reducers with routeReducer which keeps track of
-// router state
-const InitialState = {
+// Record is like class, but immutable and with default values.
+// https://facebook.github.io/immutable-js/docs/#/Record
+const Form = Record({
   disabled: false,
   error: null,
-  fields: {
+  fields: new (Record({
     email: '',
     password: ''
-  },
-};
-const initialState = InitialState;
+  }))()
+});
+const InitialState = Record({
+  form: new Form()
+});
+// Combine reducers with routeReducer which keeps track of
+// router state
+const initialState = new InitialState();
 
 const authReducer = (state = initialState, action) => {
-  if (!(state instanceof InitialState.constructor)) return initialState.merge(state);
+  if (!(state instanceof InitialState.constructor)) return initialState.mergeDeep(state);
   switch (action.type) {
 
     case actions.SET_FORM_FIELD: {

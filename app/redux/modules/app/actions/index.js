@@ -12,7 +12,7 @@ const validateForm = (validate, fields) => validate(fields)
   .email()
   .prop('password')
   .required()
-  .simplePassword()
+  .password()
   .promise;
 
 const post = (fetch, endpoint, body) =>

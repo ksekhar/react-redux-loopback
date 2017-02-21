@@ -10,11 +10,17 @@ export default (store) => {
   if (process.env.NODE_ENV === 'development') {
     console.log(store);
   }
+  function requireAuth(nextState, replaceState) {
+    const loggedIn = store.getState().users.viewer;
+    if (!loggedIn) {
+      replaceState({nextPathname: nextState.location.pathname}, '/login');
+    }
+  }
   return (
     <Route path="/" component={App}>
       <IndexRoute component={Main} />
-      <Route path="qwerty" component={Qwerty} />
-      <Route path="sse" component={SSE} />
+      <Route path="qwerty" component={Qwerty} onEnter={requireAuth} />
+      <Route path="sse" component={SSE} onEnter={requireAuth} />
     </Route>
     );
 };
