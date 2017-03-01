@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
-import Main from './containers/Main';
+import Main from './components/main/main';
 import Qwerty from './containers/Qwerty';
 import SSE from './containers/SSE';
 

@@ -16,7 +16,7 @@ const post = (endpoint, body) =>
     headers: {
       'Content-Type': 'application/json'
     },
-    body
+    body: JSON.stringify(body)
   })
     .then((response) => {
       if (response.status === 200) return response.json();
@@ -31,29 +31,34 @@ export function setFormField({target: {name, value}}) {
   };
 }
 
+// export function login(fields) {
+//   return () => ({
+//     type: 'LOGIN',
+//     payload: {
+//       promise:
+//         post('users/login', fields)
+//         .then((value) => {
+//           if (value.error) {
+//             throw value.error;
+//           } else {
+//             return value;
+//           }
+//         }, (reason) => {
+//           console.log(reason);
+//         })
+//         .catch((response) => {
+//           if (response.status === 401) {
+//             console.log('oh no');
+//           }
+//           throw response;
+//         })
+//     }
+//   });
+// }
 export function login(fields) {
-  return () => ({
-    type: 'LOGIN',
-    payload: {
-      promise:
-        post('users/login', fields)
-        .then((value) => {
-          if (value.error) {
-            throw value.error;
-          } else {
-            return value;
-          }
-        }, (reason) => {
-          console.log(reason);
-        })
-        .catch((response) => {
-          if (response.status === 401) {
-            console.log('oh no');
-          }
-          throw response;
-        })
-    }
-  });
+  post('users/login', fields)
+    .then(res => console.log(res));
+  return { type: LOGIN };
 }
 
 export function logout(token) {
