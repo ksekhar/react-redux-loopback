@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardText} from 'material-ui/Card';
@@ -17,6 +16,7 @@ class Main extends React.Component {
       email: '',
       password: ''
     };
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
 
@@ -30,7 +30,7 @@ class Main extends React.Component {
   render() {
     return (
       <Card className="container">
-        <form onSubmit={this.onFormSubmit.bind(this)}>
+        <form onSubmit={this.onFormSubmit}>
           <h2 className="card-heading">Sign In</h2>
           <div className="field-line">
             <TextField
@@ -53,7 +53,7 @@ class Main extends React.Component {
           </div>
 
           <div className="button-line">
-            <RaisedButton type="submit" label="login" primary/>
+            <RaisedButton type="submit" label="Login" primary />
           </div>
           <CardText>New to TapGoods? <Link to={'/signup'}>Sign Up</Link></CardText>
         </form>
